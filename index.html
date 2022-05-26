@@ -1,16 +1,37 @@
 ---
 layout: default
+pagination:
+  enabled: ture
 ---
 <main class="page-content" aria-label="Content">
   <div class="wrapper">
     <article class="post">
       <ul>
-        {% for post in site.posts %}
+        {% for post in paginator.posts %}
         <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
         </li>
         {% endfor %}
       </ul>
     </article>
+
+    <div class="pagination">
+      {% if paginator.total_pages > 1 %}
+      <ul>
+        {% if paginator.previous_page %}
+        <li>
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
+        </li>
+        {% endif %}
+        {% if paginator.next_page %}
+        <li>
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
   </div>
+
+  
 </main>
